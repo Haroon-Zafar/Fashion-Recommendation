@@ -3,6 +3,8 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.layers import GlobalMaxPooling2D
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
+from numpy.linalg import norm
+
 # Creating the ResnEt50 model and loading the weights, top layer is false because we will add own ours
 # Standard Image size 224, 224, 3
 
@@ -22,13 +24,30 @@ model.trainable = False
 # print(model.summary())
 
 def extractFeatures(img_path):
+
+    # we have to preprocess the image before passing it to the model
+    # we will use the preprocess_input function from keras
     img = image.load_img(img_path, target_size=(224, 224))
+
     # converting the image to array
-    x = image.img_to_array(img)
-    # adding one more dimension
-    x = x.reshape((1, x.shape[0], x.shape[1], x.shape[2]))
-    # preprocessing the input
-    x = preprocess_input(x)
-    # passing the input to the model to get the features
-    features = model.predict(x, verbose=0)
-    return features
+    imgArray = image.img_to_array(img)
+
+    # converting imgArray dimensions 224,224,3 to 1,224,224,3
+    # why ? because keras work on batches of images not single image
+    # if you have 100 images then you will have 100,224,224,3
+    # if you have single image you have to tell keras that it is a batch of 1 image
+    # resizing images
+    # will give 4D array
+    expandedImgArray = np.expand_dims(imgArray, axis=0)
+
+    # preprocessing the image
+    # preprocess_input is a function that will format the image into the format that the model expects
+    preProcessedImg = preprocess_input(expandedImgArray)
+
+    # predict() function enables us to predict the labels of the data values on the basis of the trained model.
+    result = model.predict(preProcessedImg, verbose=0).flatten()
+
+    # normalized result
+    normalizedResult = result / norm(result)
+
+    return (normalizedResult)
