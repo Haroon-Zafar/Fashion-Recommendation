@@ -6,6 +6,7 @@ import numpy as np
 from numpy.linalg import norm
 import os
 from tqdm import tqdm
+import pickle
 
 # Creating the ResnEt50 model and loading the weights, top layer is false because we will add own ours
 # Standard Image size 224, 224, 3
