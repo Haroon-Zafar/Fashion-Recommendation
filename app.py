@@ -5,7 +5,7 @@ from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
 from numpy.linalg import norm
 import os
-import tqdm
+from tqdm import tqdm
 
 # Creating the ResnEt50 model and loading the weights, top layer is false because we will add own ours
 # Standard Image size 224, 224, 3
