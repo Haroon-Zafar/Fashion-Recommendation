@@ -17,6 +17,18 @@ model.trainable = False
 
 # passing our model , and adding the top layers
 
-model = tensorflow.keras.Sequential([model, GlobalMaxPooling2D()])
 
-print(model.summary())
+# for debugging
+# print(model.summary())
+
+def extractFeatures(img_path):
+    img = image.load_img(img_path, target_size=(224, 224))
+    # converting the image to array
+    x = image.img_to_array(img)
+    # adding one more dimension
+    x = x.reshape((1, x.shape[0], x.shape[1], x.shape[2]))
+    # preprocessing the input
+    x = preprocess_input(x)
+    # passing the input to the model to get the features
+    features = model.predict(x, verbose=0)
+    return features
