@@ -2,7 +2,7 @@ import tensorflow
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.layers import GlobalMaxPooling2D
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
-
+import numpy as np
 # Creating the ResnEt50 model and loading the weights, top layer is false because we will add own ours
 # Standard Image size 224, 224, 3
 
