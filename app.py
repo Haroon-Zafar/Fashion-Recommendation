@@ -1,6 +1,6 @@
-import tensorflow as tf
-from tensorflow.keras.preprocessing.image import image
-from tensorflow.keras.layers import GlobalMaxPooling2D, Dense, Dropout
+import tensorflow
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.layers import GlobalMaxPooling2D
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 
 # Creating the ResnEt50 model and loading the weights, top layer is false because we will add own ours
@@ -17,6 +17,6 @@ model.trainable = False
 
 # passing our model , and adding the top layers
 
-model = tf.keras.Sequential([model, GlobalMaxPooling2D()])
+model = tensorflow.keras.Sequential([model, GlobalMaxPooling2D()])
 
 print(model.summary())
