@@ -59,18 +59,18 @@ def extractFeatures(img_path):
 # Now we are making a list in which we place the file names of the images in the folder `image`
 # I want to print the names of the images in the folder `image` in the terminal
 
-filenames = []
+fileNames = []
 
 # print(os.listdir('images'))
 
 # for loop will traverse through every file in the folder `images`
-# we are appending file names to the list `filenames`
+# we are appending file names to the list `fileNames`
 
 for file in os.listdir('images'):
-    filenames.append(os.path.join('images', file))
+    fileNames.append(os.path.join('images', file))
 
-# print(len(filenames))
-# print(filenames[0:5])
+# print(len(fileNames))
+# print(fileNames[0:5])
 
 
 # we just have to call this extractFeatures function for every image in the folder `images`
@@ -81,8 +81,19 @@ featuresList = []
 
 # tqdm is a progress bar library in python, here it tells progress of for loop
 
-for file in tqdm(filenames):
+for file in tqdm(fileNames):
     featuresList.append(extractFeatures(file))
 
 
 print(np.array(featuresList).shape)
+
+
+# Dumping the featuresList into a file
+# wb = write binary
+
+pickle.dump(featuresList, open('featuresList.pkl', 'wb'))
+
+
+# Dumping the filenames into a file
+
+pickle.dump(fileNames, open('featuresList.pkl', 'wb'))
