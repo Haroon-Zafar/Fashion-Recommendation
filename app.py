@@ -67,5 +67,18 @@ filenames = []
 for file in os.listdir('images'):
     filenames.append(os.path.join('images', file))
 
-print(len(filenames))
-print(filenames[0:5])
+# print(len(filenames))
+# print(filenames[0:5])
+
+
+# we just have to call this extractFeatures function for every image in the folder `images`
+# it will return a list of features for every image in the folder `images`
+
+# we will store the features in a list
+featuresList = []
+
+for file in filenames:
+    featuresList.append(extractFeatures(file))
+
+
+print(np.array(featuresList).shape)
