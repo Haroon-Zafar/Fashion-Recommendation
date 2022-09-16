@@ -57,4 +57,15 @@ def extractFeatures(img_path):
 # Now we are making a list in which we place the file names of the images in the folder `image`
 # I want to print the names of the images in the folder `image` in the terminal
 
-print(os.listdir('images'))
+filenames = []
+
+# print(os.listdir('images'))
+
+# for loop will traverse through every file in the folder `images`
+# we are appending file names to the list `filenames`
+
+for file in os.listdir('images'):
+    filenames.append(os.path.join('images', file))
+
+print(len(filenames))
+print(filenames[0:5])
