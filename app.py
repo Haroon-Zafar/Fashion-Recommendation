@@ -5,6 +5,7 @@ from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
 from numpy.linalg import norm
 import os
+import tqdm
 
 # Creating the ResnEt50 model and loading the weights, top layer is false because we will add own ours
 # Standard Image size 224, 224, 3
@@ -77,7 +78,9 @@ for file in os.listdir('images'):
 # we will store the features in a list
 featuresList = []
 
-for file in filenames:
+# tqdm is a progress bar library in python, here it tells progress of for loop
+
+for file in tqdm(filenames):
     featuresList.append(extractFeatures(file))
 
 
