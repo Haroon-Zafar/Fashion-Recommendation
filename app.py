@@ -4,6 +4,7 @@ from tensorflow.keras.layers import GlobalMaxPooling2D
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 import numpy as np
 from numpy.linalg import norm
+import os
 
 # Creating the ResnEt50 model and loading the weights, top layer is false because we will add own ours
 # Standard Image size 224, 224, 3
@@ -51,3 +52,9 @@ def extractFeatures(img_path):
     normalizedResult = result / norm(result)
 
     return (normalizedResult)
+
+
+# Now we are making a list in which we place the file names of the images in the folder `image`
+# I want to print the names of the images in the folder `image` in the terminal
+
+print(os.listdir('images'))
